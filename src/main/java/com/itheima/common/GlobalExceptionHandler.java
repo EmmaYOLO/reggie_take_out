@@ -15,7 +15,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
  * @description 全局异常处理
  */
 
-@ControllerAdvice(annotations = {RestController.class, Controller.class})//意思是，拦截上面加了@RestController或@Controller的类
+@ControllerAdvice(annotations = {RestController.class, Controller.class})//意思是，拦截加了@RestController或@Controller这两个注解的类
 @ResponseBody
 @Slf4j
 public class GlobalExceptionHandler {

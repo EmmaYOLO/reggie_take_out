@@ -102,6 +102,12 @@ public class DishController {
     step3：把2中的list作为dishDtoPage的records。
      */
 
+
+
+
+
+
+
     @GetMapping("/page")
     public R<Page> page(int page, int pageSize, String name) {
         Page<Dish> dishPage = new Page<Dish>(page, pageSize);
@@ -187,6 +193,8 @@ public class DishController {
 //
 //        return R.success(list);
 //    }
+
+
 
     @GetMapping("/list")
     public R<List<DishDto>> list(Dish dish){

@@ -28,6 +28,9 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
     @Autowired
     private SetmealDishService setmealDishService;
 
+
+
+
     /**
      * 新增套餐，同时需要保存套餐和菜品的关联关系
      * @param setmealDto
@@ -49,6 +52,31 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         setmealDishService.saveBatch(setmealDishes);
 
     }
+
+
+    @Transactional
+    public void removeWithDish1(List<Long> ids){
+        //delete from setmeal where id in ids and status = 0;
+        LambdaQueryWrapper<Setmeal> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(Setmeal::getId, ids);
+        queryWrapper.eq(Setmeal::getStatus, 1);
+
+        int count = this.count(queryWrapper);
+        if(count > 0){
+            throw new CustomException("套餐仍在售卖，无法删除。");
+        }
+
+        this.removeByIds(ids);
+
+        LambdaQueryWrapper<SetmealDish> queryWrapper1 = new LambdaQueryWrapper<>();
+        queryWrapper1.in(SetmealDish::getSetmealId, ids);
+
+        setmealDishService.remove(queryWrapper1);
+
+
+    }
+
+
 
     @Override
     @Transactional

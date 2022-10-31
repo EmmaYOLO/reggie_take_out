@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itheima.common.BaseContext;
 import com.itheima.common.R;
 import com.itheima.entity.AddressBook;
+import com.itheima.entity.User;
 import com.itheima.service.AddressBookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.List;
  * @author Emma_Lyy
  * @create 2022-07-15 1:46
  */
+
+
 @Slf4j
 @RestController
 @RequestMapping("/addressBook")
@@ -105,5 +108,10 @@ public class AddressBookController {
         return R.success(addressBookService.list(queryWrapper));
     }
 
+    @DeleteMapping
+    public R<String> delete(Long ids){
+        addressBookService.removeById(ids);
+        return R.success("地址删除成功");
+    }
 
 }
