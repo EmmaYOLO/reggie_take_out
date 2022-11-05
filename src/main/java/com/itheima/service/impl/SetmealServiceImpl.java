@@ -111,4 +111,9 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
 
 
     }
+
+    @Override
+    public void updateWithDish(SetmealDto setmealDto) {
+
+    }
 }
